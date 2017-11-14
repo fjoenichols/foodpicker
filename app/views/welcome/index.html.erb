@@ -1,0 +1,11 @@
+<div class="panel">
+  <%= form_tag("search/index",method: "get") do %>
+    <div class="input-group">
+      <%= label_tag(:q, "Food Type", class: 'input-group-addon') %>
+      <%= text_field_tag(:foodtype, "", class: 'form-control') %>
+      <%= label_tag(:q, "City, State", class: 'input-group-addon') %>
+      <%= text_field_tag(:city, "", class: 'form-control') %>
+    </div>
+    <%= submit_tag("Pick Food", class: 'btn btn-primary btn-block') %>
+  <% end %>
+</div>

@@ -1,0 +1,26 @@
+<style>
+  .business-image {
+    background-image:url(<%= @business_image %>);
+    background-size: cover;
+    background-position: center center;
+    border-radius: 15px;
+  }
+</style>
+<div class="container">
+<div class="jumbotron col-lg-12">
+  <div class="row">
+  <div class="col-lg-6 business-image">
+  </div>
+  <div class="col-lg-6">
+    <h1><%= @business_name %></h1>
+    <h3><%= @business_address %></h3>
+    <h4><%= @business_city %></h4>
+    <h4><%= @business_phone %></h4>
+    <% if @business_name != "No Results" %>
+    <h4>Rating: <%= @business_rating %></h4>
+    <% end %>
+    <p><%= @total_results %> results for: <%= @foodtype %>, <%= @city %></p>
+  </div>
+</div>
+</div>
+</div>
