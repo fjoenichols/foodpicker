@@ -45,7 +45,7 @@ class SearchController < ApplicationController
 
     response = findPlaces(@foodtype, @city)
     if response["total"] <= 50
-    	@total_results = response["total"]
+      @total_results = response["total"]
     else
         @total_results = 50
     end
@@ -67,9 +67,5 @@ class SearchController < ApplicationController
     end 
     rescue NoMethodError => e
         puts e
-  end
-
-  
-  def pick
-  end
+  end 
 end
