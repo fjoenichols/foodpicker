@@ -6,6 +6,32 @@
     border-radius: 15px;
   }
 </style>
+<% content_for :navbar do %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="">FoodPicker</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  <div class="collapse navbar-collapse form-group float-right">
+    <%= form_tag("index",method: "get") do %>
+      <div class="row">
+      <div class="col-4 input-group">
+        <%= label_tag(:q, "Food Type", class: 'input-group-addon') %>
+        <%= text_field_tag(:foodtype, "", class: 'form-control', placeholder: @foodtype) %>
+      </div>
+      <div class="col-4 input-group">
+        <%= label_tag(:q, "City, State", class: 'input-group-addon') %>
+        <%= text_field_tag(:city, "", class: 'form-control', placeholder: @city) %>
+      </div>
+      <div class="col-4">
+        <%= submit_tag("Pick Food", class: 'btn btn-primary btn-block') %>
+      </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+</nav>
+<% end %>
 <div class="container">
 <div class="jumbotron col-lg-12">
   <div class="row">

@@ -8,6 +8,9 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+<% if content_for?(:navbar) %>
+    <%= yield(:navbar) %>
+<% else %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="">FoodPicker</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +35,7 @@
   </div>
 </div>
 </nav>
+<% end %>
     <main role="main" class="container">
 
       <div class="app-wrapper">

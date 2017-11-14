@@ -36,6 +36,7 @@ class SearchController < ApplicationController
         price: "1,2",
         radius: 4825,
         open_now: true,
+        limit: 50
       }
 
       response = HTTP.auth(bearer_token).get(url, params: params)
@@ -43,9 +44,13 @@ class SearchController < ApplicationController
     end
 
     response = findPlaces(@foodtype, @city)
-    @total_results = response["total"]
-    randomNumber = rand(@total_results+1)
-    pickedBusiness = response["businesses"][randomNumber]
+    if response["total"] <= 50
+    	@total_results = response["total"]
+    else
+        @total_results = 50
+    end
+    @randomNumber = rand(@total_results)
+    pickedBusiness = response["businesses"][@randomNumber]
     if @total_results >= 1
       @business_name =  pickedBusiness["name"]
       @business_address = pickedBusiness["location"]["address1"].to_s + " " + pickedBusiness["location"]["address2"].to_s + " " + pickedBusiness["location"]["address3"].to_s
@@ -60,7 +65,10 @@ class SearchController < ApplicationController
       @business_rating = ""
       @business_image = ""
     end 
+    rescue NoMethodError => e
+        puts e
   end
+
   
   def pick
   end
