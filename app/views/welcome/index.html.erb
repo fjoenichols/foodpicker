@@ -1,11 +1,15 @@
-<div class="panel">
-  <%= form_tag("search/index",method: "get") do %>
-    <div class="input-group">
-      <%= label_tag(:q, "Food Type", class: 'input-group-addon') %>
-      <%= text_field_tag(:foodtype, "", class: 'form-control') %>
-      <%= label_tag(:q, "City, State", class: 'input-group-addon') %>
-      <%= text_field_tag(:city, "", class: 'form-control') %>
-    </div>
-    <%= submit_tag("Pick Food", class: 'btn btn-primary btn-block') %>
-  <% end %>
+<div class="container">
+<div class="jumbotron col-lg-12">
+  <div class="row">
+  <div class="col-lg-6 text-center">
+    <h1>Welcome to the FoodPicker</h1>
+    <p>FoodPicker  was created to help those who are unable to decide what they'd like to eat. It was created by a man who would always argue with his wife about what's for dinner and both of them would never want to decide.</p>
+    <p>Go ahead and enter a food type and your city, either (City, State or Zipcode) and give it a spin. You might find a place you like.</p>
+    <p>Powered by <%= image_tag("Yelp_trademark_RGB.png", height:'50', style: 'margin-top: -10px; margin-left: -10px; margin-right: -10px') %></p>
+   </div>
+  <div class="col-lg-6">
+    <%= image_tag("pexels-photo-106343.jpeg", class: "rounded img-fluid") %>
+  </div>
+  </div>
+</div>
 </div>

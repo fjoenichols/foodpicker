@@ -19,16 +19,16 @@
   <div class="collapse navbar-collapse form-group float-right">
     <%= form_tag("search/index",method: "get") do %>
       <div class="row">
-      <div class="col-4 input-group">
+      <div class="col-4 input-group" style="padding-top: 10px">
         <%= label_tag(:q, "Food Type", class: 'input-group-addon') %>
         <%= text_field_tag(:foodtype, "", class: 'form-control') %>
       </div>
-      <div class="col-4 input-group">
+      <div class="col-4 input-group" style="padding-top: 10px">
         <%= label_tag(:q, "City, State", class: 'input-group-addon') %>
         <%= text_field_tag(:city, "", class: 'form-control') %>
       </div>
       <div class="col-4">
-        <%= submit_tag("Pick Food", class: 'btn btn-primary btn-block') %>
+        <%= submit_tag("Pick Food", class: 'btn btn-primary btn-block', style: 'margin-top: 10px') %>
       </div>
       </div>
     <% end %>

@@ -52,6 +52,8 @@ class SearchController < ApplicationController
     @randomNumber = rand(@total_results)
     pickedBusiness = response["businesses"][@randomNumber]
     if @total_results >= 1
+      @business_url =  pickedBusiness["url"]
+      @business_review_count = pickedBusiness["review_count"]
       @business_name =  pickedBusiness["name"]
       @business_address = pickedBusiness["location"]["address1"].to_s + " " + pickedBusiness["location"]["address2"].to_s + " " + pickedBusiness["location"]["address3"].to_s
       @business_city = pickedBusiness["location"]["city"].to_s + ", " + pickedBusiness["location"]["state"].to_s + " " + pickedBusiness["location"]["zipcode"].to_s
