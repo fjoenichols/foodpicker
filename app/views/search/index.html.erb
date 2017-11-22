@@ -1,28 +1,45 @@
-<style>
-  .business-image {
-    background-image:url(<%= @business_image %>);
-    background-size: cover;
-    background-position: center center;
-    border-radius: 15px;
-  }
-</style>
+  <script>
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+
+    function showPosition(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      $(document).ready(function(){
+        $("#geoLocation").val(latitude + "," + longitude);
+      });
+    }
+
+   var d = new Date();
+   var h = d.toString().split(" ")[4].split(":")[0];
+   var m = d.toString().split(" ")[4].split(":")[1];
+
+    $(document).ready(function(){
+      $("#time").val(h + "" + m);
+    });
+  </script>
 <% content_for :navbar do %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="">FoodPicker</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse form-group float-right">
-      <%= form_tag("index",method: "get") do %>
+    <div class="collapse navbar-collapse form-group float-right" id="navbarSupportedContent">
+      <%= form_tag("index",method: "post",id: "foodPickerForm") do %>
         <div class="row">
         <div class="col-4 input-group" style="padding-top: 10px">
           <%= label_tag(:q, "Food Type", class: 'input-group-addon') %>
-          <%= text_field_tag(:foodtype, "", class: 'form-control') %>
+          <%= text_field_tag(:foodtype, "", class: 'form-control', value: @foodtype) %>
         </div>
         <div class="col-4 input-group" style="padding-top: 10px">
           <%= label_tag(:q, "City, State", class: 'input-group-addon') %>
-          <%= text_field_tag(:city, "", class: 'form-control') %>
+          <%= text_field_tag(:city, "", class: 'form-control', value: @city) %>
         </div>
+        <%= hidden_field_tag(:time) %>
+        <%= hidden_field_tag(:geoLocation) %>
         <div class="col-4">
           <%= submit_tag("Pick Food", class: 'btn btn-primary btn-block', style: 'margin-top: 10px') %>    
         </div>
@@ -43,10 +60,10 @@
     <h5 style="line-height: 30%"><%= @business_city %></h5></a>
     <h5><%= @business_phone %></h5>
     <% if @business_name != "No Results" %>
-    <h5>Rating: <%= @business_rating %></h5>
+    <h5>Rating: <img src ="/assets/regular/regular_<%= @business_rating %>.png" /></h5>
     <p style="line-height: 10%; font-size: 14px">Based on <a href="<%= @business_url %>"><%= @business_review_count %> Reviews</a></p>
     <% end %>
-    <p style="font-size: 12px"><a href="https://www.yelp.com/search?find_desc=<%= @foodtype %>&find_loc=<%= @city %>"><%= @total_results %> results for: <%= @foodtype %>, <%= @city %></a></p>
+    <p style="font-size: 12px"><a href="https://www.yelp.com/search?find_desc=<%= @foodtype %>&find_loc=<%= @city %>"><%= @total_results %> results for: <%= @foodtype %> near <%= @city %></a></p> 
   </div>
 </div>
 </div>

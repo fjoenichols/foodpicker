@@ -1,6 +1,7 @@
 require 'http'
 require 'json'
 require 'credentials'
+require 'geocoder'
 
 class SearchController < ApplicationController
     # Constants, do not change these
@@ -10,9 +11,29 @@ class SearchController < ApplicationController
     GRANT_TYPE = "client_credentials"
   
   def index
-    @foodtype = params[:foodtype]
-    @city = params[:city]
+   
+    @time = params[:time].to_i    
+    if params[:foodtype].blank?
+      case @time
+      when 300 .. 1030
+        @foodtype = "Breakfast"
+      when 1031 .. 1530
+        @foodtype = "Lunch"
+      else  
+        @foodtype = "Dinner"
+      end
+    else
+      @foodtype = params[:foodtype]
+    end
     
+    if params[:city].blank? && params[:geoLocation].blank?
+      @city = request.location.city + ", " + request.location.state
+    elsif params[:city].blank?  
+      @city = params[:geoLocation]
+    else
+      @city = params[:city]
+    end
+
     def bearer_token
       url = "#{API_HOST}#{TOKEN_PATH}"
       params = {

@@ -8,16 +8,39 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+  <script>
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+
+    function showPosition(position) { 
+      var latitude = position.coords.latitude; 
+      var longitude = position.coords.longitude;
+      $(document).ready(function(){
+        $("#geoLocation").val(latitude + "," + longitude);
+      });
+    }
+   
+   var d = new Date();
+   var h = d.toString().split(" ")[4].split(":")[0];
+   var m = d.toString().split(" ")[4].split(":")[1];
+
+    $(document).ready(function(){
+      $("#time").val(h + "" + m);
+    });
+  </script>
 <% if content_for?(:navbar) %>
     <%= yield(:navbar) %>
 <% else %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="">FoodPicker</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  <div class="collapse navbar-collapse form-group float-right">
-    <%= form_tag("search/index",method: "get") do %>
+  <div class="collapse navbar-collapse form-group float-right" id="navbarSupportedContent">
+    <%= form_tag("search/index",method: "post", id: "foodPickerForm") do %>
       <div class="row">
       <div class="col-4 input-group" style="padding-top: 10px">
         <%= label_tag(:q, "Food Type", class: 'input-group-addon') %>
@@ -27,6 +50,8 @@
         <%= label_tag(:q, "City, State", class: 'input-group-addon') %>
         <%= text_field_tag(:city, "", class: 'form-control') %>
       </div>
+      <%= hidden_field_tag(:time) %>
+      <%= hidden_field_tag(:geoLocation) %>
       <div class="col-4">
         <%= submit_tag("Pick Food", class: 'btn btn-primary btn-block', style: 'margin-top: 10px') %>
       </div>
