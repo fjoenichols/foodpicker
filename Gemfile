@@ -22,7 +22,7 @@ gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'bootstrap', '~> 4.0.0.beta2.1'
+gem 'bootstrap', '>= 4.1.2'
 gem 'sprockets-rails', '>= 2.3.2'
 gem 'autoprefixer-rails'
 # Use CoffeeScript for .coffee assets and views
